@@ -72,28 +72,38 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    // In viewDidLoad
-
-    self.titleField.backgroundColor = [UIColor systemGray6Color];
-    self.titleField.borderStyle = UITextBorderStyleNone;
-    self.titleField.layer.cornerRadius = 10;
-    self.titleField.clipsToBounds = YES;
-
-    self.desc.backgroundColor = [UIColor systemGray6Color];
-    self.desc.layer.cornerRadius = 10;
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        self.navigationItem.title = @"New Task";
+        self.navigationController.navigationBar.prefersLargeTitles = YES;
+        
+        self.titleField.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.1];
+        self.titleField.textColor = [UIColor whiteColor];
+        self.titleField.borderStyle = UITextBorderStyleNone;
+        self.titleField.layer.cornerRadius = 12;
+        self.titleField.layer.sublayerTransform = CATransform3DMakeTranslation(10, 0, 0);
+        
+        self.desc.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.1];
+        self.desc.textColor = [UIColor whiteColor];
+        self.desc.layer.cornerRadius = 12;
+        self.desc.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
+        
+        self.priority.selectedSegmentTintColor = [UIColor systemBlueColor];
+        [self.priority setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]} forState:UIControlStateSelected];
+        [self.priority setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor lightGrayColor]} forState:UIControlStateNormal];
+        
+        self.dueDate.preferredDatePickerStyle = UIDatePickerStyleCompact; // Modern iOS style
+        self.dueDate.tintColor = [UIColor systemBlueColor];
+        
+        UIColor *headerColor = [UIColor systemGrayColor];
+        UIFont *headerFont = [UIFont systemFontOfSize:14 weight:UIFontWeightSemibold];
+        
+       
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         self.taskManager = [[TaskManager alloc] initWithContext:appDelegate.persistentContainer.viewContext];
-    self.dueDate.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-    self.navigationItem.title=@"New Task";
-    self.navigationItem.largeTitleDisplayMode=YES;
-    [self.navigationController.navigationBar setLargeTitleTextAttributes:
-     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    NSDate *today = [NSDate date];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"EEEE, d MMM, HH:mm"];
-
-    self.creationDate.text = [NSString stringWithFormat:@"Created at : %@", [formatter stringFromDate:today]];
+        
+        NSDate *today = [NSDate date];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"EEEE, d MMM"];
+        self.creationDate.text = [NSString stringWithFormat:@"Today, %@", [formatter stringFromDate:today]];
     
     
 }

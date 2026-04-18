@@ -89,6 +89,19 @@
                      self.prority.enabled = NO;
                     self.saveButton.enabled=NO;
                 }
+        NSDictionary *normalAttributes = @{
+            NSForegroundColorAttributeName: [UIColor systemGrayColor], // Your MUTED_COLOR
+            NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightSemibold]
+        };
+
+        NSDictionary *selectedAttributes = @{
+            NSForegroundColorAttributeName: [UIColor whiteColor],
+            NSFontAttributeName: [UIFont systemFontOfSize:12 weight:UIFontWeightSemibold]
+        };
+        [self.prority setTitleTextAttributes:normalAttributes forState:UIControlStateNormal];
+        [self.prority setTitleTextAttributes:selectedAttributes forState:UIControlStateSelected];
+        [self.status setTitleTextAttributes:normalAttributes forState:UIControlStateNormal];
+        [self.status setTitleTextAttributes:selectedAttributes forState:UIControlStateSelected];
 }
     self.navigationItem.title=@"Your Task";
     self.navigationItem.largeTitleDisplayMode=YES;
